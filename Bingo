@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Bingo {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    // Pedir el número de cartones a crear
+    System.out.print("Ingrese el número de cartones de bingo que desea crear: ");
+    int numCartones = sc.nextInt();
+
+    // Crear el arreglo de cartones
+    int[][][] cartones = new int[numCartones][5][5];
+
+    // Generar los cartones
+    for (int k = 0; k < numCartones; k++) {
+      // Inicializar el arreglo de números usados en el cartón
+      boolean[] numerosUsados = new boolean[76];
+
+      // Generar los números aleatorios para el cartón
+      for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+          int num;
+          do {
+            num = (int) (Math.random() * 75 + 1);
+          } while (numerosUsados[num]);
+          numerosUsados[num] = true;
+          cartones[k][i][j] = num;
+        }
+      }
+    }
+
+    // Mostrar los cartones generados
+    for (int k = 0; k < numCartones; k++) {
+      System.out.println("Cartón " + (k + 1) + ":");
+      for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+          System.out.print(cartones[k][i][j] + "\t");
+        }
+        System.out.println();
+      }
+      System.out.println();
+    }
+  }
+}
